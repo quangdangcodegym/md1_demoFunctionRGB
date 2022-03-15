@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="idBox" style="width: 500px; height: 60px; background-color: rgb(0,255,255);">
+        <h1 id="idH1">rgb(1,24,125)</h1>
+    </div>
+    <input type="range" id="vol1" name="vol" min="0" max="255" oninput="changeRvalue()">
+    <input type="range" id="vol2" name="vol" min="0" max="255" oninput="changeGvalue()">
+    <input type="range" id="vol3" name="vol" min="0" max="255" oninput="changeBvalue()">
+</body>
+<script>
+
+
+        var _valuePresent = "rgb(1,24,125)";
+        var _RValue = xuLyChuoi(_valuePresent, 'R');
+        var _GValue = xuLyChuoi(_valuePresent, 'G');
+        var _BValue = xuLyChuoi(_valuePresent, 'B');
+
+
+        var _str = "rgb(" + _RValue +  "," + _GValue +","+ _BValue +")";
+        console.log(_str);
+
+    function changeRvalue(){
+        var _i = document.getElementById("vol1").value;
+
+        var _valuePresent = document.getElementById("idH1").innerText;
+        console.log("Value present: " + _valuePresent);
+
+        var _GValue = xuLyChuoi(_valuePresent, 'G');
+        var _BValue = xuLyChuoi(_valuePresent, 'B');
+
+
+        var _str = "rgb(" + _i + "," + _GValue +","+ _BValue +")";
+        console.log(_str);
+        document.getElementById("idH1").innerText = _str;
+        document.getElementById("idBox").style.backgroundColor = _str;
+    }
+    function changeGvalue(){
+        var _i = document.getElementById("vol2").value;
+
+
+        var _valuePresent = document.getElementById("idH1").innerText;
+        console.log("Value present: " + _valuePresent);
+
+        var _GValue = xuLyChuoi(_valuePresent, 'R');
+        var _BValue = xuLyChuoi(_valuePresent, 'B');
+
+        var _str = "rgb(" + _RValue + "," + _i +","+ _BValue +")";
+        console.log(_str);
+        document.getElementById("idH1").innerText = _str;
+        document.getElementById("idBox").style.backgroundColor = _str;
+
+    }
+    function changeBvalue(){
+        var _i = document.getElementById("vol3").value;
+
+        var _valuePresent = document.getElementById("idH1").innerText;
+        console.log("Value present: " + _valuePresent);
+
+        var _RValue = xuLyChuoi(_valuePresent, 'R');
+        var _GValue = xuLyChuoi(_valuePresent, 'G');
+
+        var _str = "rgb(" + _RValue + "," + _GValue +","+ _i +")";
+        console.log(_str);
+        document.getElementById("idH1").innerText = _str;
+        document.getElementById("idBox").style.backgroundColor = _str;
+ 
+    }
+    function xuLyChuoi(_str, sttColor){
+        // rgb(1,24,125)
+        var _index1 =  _str.indexOf('(') + 1;
+        var _index2 =  _str.indexOf(')');
+        //let part = str.substring(7, 13);
+        var _subStr = _str.substring(_index1, _index2);
+        var _list = _subStr.split(",");
+        var value;
+        switch(sttColor){
+            case 'R':
+                value = _list[0];
+                break;
+            case 'G':
+                value = _list[1];
+                break;
+            case 'B':
+                value = _list[2];
+                break;
+        }
+        return value;
+    }
+</script>
+</html>
